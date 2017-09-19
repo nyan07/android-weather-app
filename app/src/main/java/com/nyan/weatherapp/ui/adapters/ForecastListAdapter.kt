@@ -1,4 +1,4 @@
-package com.nyan.weatherapp.adapters;
+package com.nyan.weatherapp.ui.adapters;
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
