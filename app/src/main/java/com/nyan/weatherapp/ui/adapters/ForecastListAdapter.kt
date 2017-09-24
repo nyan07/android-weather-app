@@ -4,15 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.nyan.weatherapp.R
 import com.nyan.weatherapp.domain.model.Forecast
 import com.nyan.weatherapp.domain.model.ForecastList
-import com.nyan.weatherapp.ui.utils.ctx
+import com.nyan.weatherapp.extensions.ctx
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.find
 import kotlinx.android.synthetic.main.item_forecast.view.*
+import java.text.DateFormat
+import java.util.*
 
 class ForecastListAdapter(
         private val weekForecast: ForecastList,
@@ -36,12 +35,17 @@ class ForecastListAdapter(
         fun bindForecast(forecast:Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = date
+                itemView.date.text = convertDate(date)
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
+        }
+
+        private fun convertDate(date: Long): String {
+            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+            return df.format(date)
         }
     }
 }

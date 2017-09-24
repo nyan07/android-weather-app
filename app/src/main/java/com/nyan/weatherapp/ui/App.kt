@@ -1,7 +1,7 @@
 package com.nyan.weatherapp.ui
 
 import android.app.Application
-import com.nyan.weatherapp.ui.utils.DelegatesExt
+import com.nyan.weatherapp.extensions.DelegatesExt
 
 class App : Application() {
 

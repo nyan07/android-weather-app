@@ -1,4 +1,4 @@
-package com.nyan.weatherapp.ui.utils
+package com.nyan.weatherapp.extensions
 
 import android.content.Context
 import android.view.View

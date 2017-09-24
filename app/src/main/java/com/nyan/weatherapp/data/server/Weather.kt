@@ -1,4 +1,4 @@
-package com.nyan.weatherapp.data.response
+package com.nyan.weatherapp.data.server
 
 data class Weather(
         val id:Long,
