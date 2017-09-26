@@ -1,11 +1,9 @@
 package com.nyan.weatherapp.data.db
 
 import com.nyan.weatherapp.domain.datasource.ForecastDataSource
+import com.nyan.weatherapp.domain.model.Forecast
 import com.nyan.weatherapp.domain.model.ForecastList
-import com.nyan.weatherapp.extensions.clear
-import com.nyan.weatherapp.extensions.parseList
-import com.nyan.weatherapp.extensions.parseOpt
-import com.nyan.weatherapp.extensions.toVarargArray
+import com.nyan.weatherapp.extensions.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
@@ -26,6 +24,12 @@ class ForecastDb(
 
         if (city != null) dataMapper.convertToDomain(city) else null
 
+    }
+
+    override fun requestDayForecast(id:Long): Forecast? = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME).byId(id)
+                .parseOpt { DayForecast(HashMap(it)) }
+        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
     }
 
     fun saveForecast(forecast:ForecastList) = forecastDbHelper.use {
