@@ -1,14 +1,13 @@
-package com.nyan.weatherapp.domain.mappers
+package com.nyan.weatherapp.data.server
 
 import java.util.concurrent.TimeUnit
-import com.nyan.weatherapp.data.server.Forecast
-import com.nyan.weatherapp.data.server.ForecastResult
 import com.nyan.weatherapp.domain.model.ForecastList
 import java.util.*
 import com.nyan.weatherapp.domain.model.Forecast as ModelForecast
 
-class ForecastDataMapper {
-    fun convertFromDataModel(zipCode:Long, forecast: ForecastResult): ForecastList =
+class ServerDataMapper {
+
+    fun convertToDomain(zipCode:Long, forecast: ForecastResult): ForecastList =
             ForecastList(zipCode, forecast.city.name, forecast.city.country, convertForecastListToDomain(forecast.list))
 
     fun convertForecastListToDomain(list: List<Forecast>): List<ModelForecast> {

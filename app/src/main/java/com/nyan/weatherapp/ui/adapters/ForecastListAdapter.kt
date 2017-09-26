@@ -18,8 +18,8 @@ class ForecastListAdapter(
         private val itemClick: (Forecast) -> Unit
     ) : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int):ViewHolder {
-        val view = LayoutInflater.from(parent?.ctx).inflate(R.layout.item_forecast, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ViewHolder {
+        val view = LayoutInflater.from(parent.ctx).inflate(R.layout.item_forecast, parent, false)
         return ViewHolder(view, itemClick)
     }
 
