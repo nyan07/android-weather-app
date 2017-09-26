@@ -8,6 +8,7 @@ import com.nyan.weatherapp.R
 import com.nyan.weatherapp.domain.model.Forecast
 import com.nyan.weatherapp.domain.model.ForecastList
 import com.nyan.weatherapp.extensions.ctx
+import com.nyan.weatherapp.extensions.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import java.text.DateFormat
@@ -35,17 +36,12 @@ class ForecastListAdapter(
         fun bindForecast(forecast:Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = convertDate(date)
+                itemView.date.text = date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
-        }
-
-        private fun convertDate(date: Long): String {
-            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-            return df.format(date)
         }
     }
 }
