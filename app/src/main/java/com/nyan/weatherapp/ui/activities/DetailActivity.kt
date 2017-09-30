@@ -2,6 +2,7 @@ package com.nyan.weatherapp.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.widget.TextView
 import com.nyan.weatherapp.R
 import com.nyan.weatherapp.domain.commands.RequestDayForecastCommand
@@ -13,9 +14,13 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.text.DateFormat
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.jetbrains.anko.find
 
 
-class DetailActivity: AppCompatActivity() {
+class DetailActivity: AppCompatActivity(), ToolbarManager {
+
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
+
     companion object {
         val ID = "DetailActivity:id"
         val CITY_NAME = "DetailActivity:cityName"
@@ -24,7 +29,10 @@ class DetailActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        title = intent.getStringExtra(CITY_NAME)
+
+        initToolbar()
+        toolbarTitle = intent.getStringExtra(CITY_NAME)
+        enableHomeAsUp { onBackPressed() }
 
         doAsync {
             val result = RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute()
