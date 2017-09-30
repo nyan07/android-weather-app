@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
 
     override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
-    private val zipCode:Long by DelegatesExt.longPreference(this,
+    private val zipCode:Long by DelegatesExt.preference(this,
             SettingsActivity.ZIP_CODE, SettingsActivity.DEFAULT_ZIP)
 
     override fun onCreate(savedInstanceState: Bundle?) {
